@@ -1,6 +1,5 @@
 class Solution:
     def canSortArray(self, nums: List[int]) -> bool:
-        temp_val = 0
         for i in range(len(nums)):
             for j in range(i):
                 if i == 0:
