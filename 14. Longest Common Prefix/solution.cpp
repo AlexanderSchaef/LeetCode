@@ -2,37 +2,17 @@ class Solution {
 public:
     string longestCommonPrefix(vector<string>& strs) {
         string prefix = "";
-        int shortest_string_length = strs[0].length();
-        int current_position = 0;
-
-        for (string str : strs) {
-            if (str.length() < shortest_string_length){
-                // the longest prefix can be lo longer than the shortest string in the vector
-                shortest_string_length = str.length();
+        sort(strs.begin(),strs.end());
+        string first = strs[0];
+        string last = strs[strs.size() - 1];
+        // with a sorted vector, only the first and last strings need to be compared
+        for (int i = 0; i < min(first.size(), last.size()); i++) {
+            // the smaller size is the only one you have to iterate through
+            if (first[i] != last[i]) {
+                return prefix;
             }
+            prefix += first[i];
         }
-        if (shortest_string_length == 0) {
-            return prefix;
-        }
-
-        bool all_same = true;
-        for (int i = 0; i < shortest_string_length; i++) {
-            char c = strs[0][i];
-
-            for (string str : strs) {
-                if (str[i] == c) {
-                    all_same = true;
-                } else {
-                    // if any fail, break
-                    all_same = false;
-                    return prefix;
-                }
-            }
-            if (all_same) {
-                prefix += c;
-            }
-        }
-
         return prefix;
     }
 };
